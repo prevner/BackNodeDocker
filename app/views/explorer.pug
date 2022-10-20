@@ -1,0 +1,55 @@
+doctype html
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MongoApp</title>
+
+  <link rel="stylesheet" href="/static/app.css" />
+</head>
+<body>
+  
+  <nav>
+    <ul>
+      <li><a href="/">Accueil</a></li>
+      <li><a href="/restos">Restos</a></li>
+      <li><a href="/Explorer">Explorer</a></li>
+    </ul>
+  </nav>
+
+  <main>
+      .form  
+       =" "     
+       form(action="/multisearch",method="GET")
+                label(for="city")
+                 select#borough(type='select'  name='city' required='true')
+                   option(value="") #{"selectionner un quartier"}
+                     each  borough in boroughs
+                        option(value=borough) #{borough}
+                     
+                 select#cuisine(type='select'  name='cuis' required='true')
+                    option(value="") #{"Type de cuisine"}
+                        each  c in cuisines
+                            option(value=c) #{c}
+                 button(type="submit") rechercher
+  </main>
+  <main>
+
+       if(resultats)
+          table(style='width:100%', border='1')
+            tr
+                th Restaurant
+                th Cuisine
+                th Adresse
+            each res, key in resultats
+                tr   
+                  td= res.name 
+                  td= res.cuisine 
+                  td= " building: " + res.address.building+" street: "+ res.address.street + " coord: "+res.address.coord+" zipcode : "+res.address.zipcode
+                    
+  </main>
+
+
+  </body>
+</html>
